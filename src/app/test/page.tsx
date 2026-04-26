@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { Badge, DisclaimerNote } from "@/components/ui";
+import { Badge, DisclaimerNote, ProgressStepper } from "@/components/ui";
 import { TEST_QUESTIONS } from "@/lib/mockData";
+import { useAutoT } from "@/lib/LocaleProvider";
 
 const TYPE_LABELS: Record<string, string> = {
   grammar: "Grammar",
@@ -16,6 +16,10 @@ const TYPE_LABELS: Record<string, string> = {
 
 export default function TestPage() {
   const router = useRouter();
+  // Test prompts, options, explanations, and navigation labels are not in the
+  // typed dictionary — route them all through useAutoT() so they follow the
+  // active locale.
+  const tr = useAutoT();
   const startTimeRef = useRef<number>(Date.now());
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [current, setCurrent] = useState(0);
@@ -76,14 +80,17 @@ export default function TestPage() {
   const allAnswered = answered === total;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto min-w-0 space-y-6">
+      <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
+        <ProgressStepper current={4} />
+      </div>
       {/* Header */}
       <section className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="section-label">Step 04 · Micro-skill test</p>
+        <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="section-label">{tr("Step 05 · Micro-skill test", "test.stepLabel")}</p>
             <h1 className="text-2xl font-bold tracking-tight text-[var(--ink)]">
-              Label-to-Ladder readiness test
+              {tr("Unmapped Voices readiness test", "test.title")}
             </h1>
           </div>
           <div className="text-right">
@@ -91,7 +98,7 @@ export default function TestPage() {
               {current + 1}
               <span className="text-base font-medium text-[var(--ink-2)]">/{total}</span>
             </p>
-            <p className="text-xs text-[var(--ink-2)]">questions</p>
+            <p className="text-xs text-[var(--ink-2)]">{tr("questions", "test.questions")}</p>
           </div>
         </div>
         {/* Progress bar */}
@@ -106,15 +113,19 @@ export default function TestPage() {
       {/* Question */}
       <div className="rise rise-2 rounded-2xl border border-[var(--line)] bg-white p-6 shadow-sm space-y-4">
         <div className="flex items-center gap-2">
-          <Badge variant="default">{TYPE_LABELS[q.type] ?? q.type}</Badge>
-          <span className="text-xs text-[var(--ink-2)]">Question {current + 1} of {total}</span>
+          <Badge variant="default">{tr(TYPE_LABELS[q.type] ?? q.type, `test.type.${q.type}`)}</Badge>
+          <span className="text-xs text-[var(--ink-2)]">
+            {tr("Question", "test.questionWord")} {current + 1} {tr("of", "test.ofWord")} {total}
+          </span>
         </div>
 
-        <p className="text-base font-semibold text-[var(--ink)] leading-snug">{q.prompt}</p>
+        <p className="text-base font-semibold text-[var(--ink)] leading-snug">
+          {tr(q.prompt, `test.${q.id}.prompt`)}
+        </p>
 
         {q.context && (
           <div className="rounded-xl bg-[var(--bg)] p-3 text-sm text-[var(--ink-2)] italic leading-relaxed border-l-2 border-[var(--teal)]">
-            {q.context}
+            {tr(q.context, `test.${q.id}.context`)}
           </div>
         )}
 
@@ -141,7 +152,7 @@ export default function TestPage() {
                 <span className="flex items-start gap-2">
                   {isAnswered && isCorrect && <span className="text-emerald-600 shrink-0">✓</span>}
                   {isAnswered && isSelected && !isCorrect && <span className="text-red-500 shrink-0">×</span>}
-                  {opt}
+                  {tr(opt, `test.${q.id}.opt.${opt}`)}
                 </span>
               </button>
             );
@@ -151,8 +162,10 @@ export default function TestPage() {
         {/* Explanation after answering */}
         {revealed && (
           <div className="rounded-xl bg-[var(--bg)] p-3 space-y-1 border-l-2 border-[var(--teal)]">
-            <p className="text-xs font-semibold text-[var(--teal)]">Explanation</p>
-            <p className="text-sm text-[var(--ink-2)] leading-relaxed">{q.explanation}</p>
+            <p className="text-xs font-semibold text-[var(--teal)]">{tr("Explanation", "test.explanationLabel")}</p>
+            <p className="text-sm text-[var(--ink-2)] leading-relaxed">
+              {tr(q.explanation, `test.${q.id}.explanation`)}
+            </p>
           </div>
         )}
       </div>
@@ -164,7 +177,7 @@ export default function TestPage() {
             onClick={() => { setCurrent((c) => c - 1); setRevealed(answers[TEST_QUESTIONS[current - 1]?.id] ?? null); }}
             className="flex-1 rounded-xl border border-[var(--line)] bg-white px-4 py-2.5 text-sm font-medium text-[var(--ink)] hover:bg-[var(--bg)] transition-colors"
           >
-            Back
+            {tr("Back", "test.back")}
           </button>
         )}
         {!isLast && (
@@ -173,7 +186,7 @@ export default function TestPage() {
             disabled={!answers[q.id]}
             className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--teal-dark)] disabled:opacity-40 transition-colors"
           >
-            Next question →
+            {tr("Next question", "test.next")} →
           </button>
         )}
         {isLast && (
@@ -182,18 +195,25 @@ export default function TestPage() {
             disabled={!allAnswered || submitting}
             className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--teal-dark)] disabled:opacity-40 transition-colors"
           >
-            {submitting ? "Calculating score…" : "Submit test & generate passport →"}
+            {submitting
+              ? tr("Calculating score…", "test.calculating")
+              : `${tr("Submit test & generate passport", "test.submit")} →`}
           </button>
         )}
       </div>
 
       {/* Progress summary */}
       <div className="text-center">
-        <p className="text-xs text-[var(--ink-2)]">{answered} of {total} answered</p>
+        <p className="text-xs text-[var(--ink-2)]">
+          {answered} {tr("of", "test.ofWord")} {total} {tr("answered", "test.answeredWord")}
+        </p>
       </div>
 
       <DisclaimerNote
-        text="Prototype demo: questions are seeded. Scoring uses a real formula: 35% accuracy + 20% consistency + 15% speed + 20% language + 10% reasoning."
+        text={tr(
+          "Prototype demo: questions are seeded. Scoring uses a real formula: 35% accuracy + 20% consistency + 15% speed + 20% language + 10% reasoning.",
+          "test.disclaimer",
+        )}
       />
     </div>
   );

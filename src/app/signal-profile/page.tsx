@@ -67,7 +67,7 @@ export default function SignalProfilePage() {
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Progress */}
       <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
-        <ProgressStepper current={3} />
+        <ProgressStepper current={5} />
       </div>
 
       {/* Header */}

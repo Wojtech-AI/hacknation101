@@ -12,7 +12,7 @@ export default function TasksPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Progress */}
       <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
-        <ProgressStepper current={4} />
+        <ProgressStepper current={6} />
       </div>
 
       {/* Header */}
@@ -23,8 +23,8 @@ export default function TasksPage() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-[var(--ink)]">Task Hub</h1>
         <p className="text-sm text-[var(--ink-2)] leading-relaxed max-w-xl">
-          These simulated AI evaluation tasks are matched to your Signal Profile. LocalLens does not optimise for
-          cheapest labour. It filters tasks by fairness, safety, transparency, and progression value.
+          These simulated AI evaluation tasks are matched to your Signal Profile. Unmapped Voices does not optimise
+          for cheapest labour. It filters tasks by fairness, safety, transparency, and progression value.
         </p>
       </section>
 

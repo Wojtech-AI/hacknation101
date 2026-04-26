@@ -46,7 +46,7 @@ export default function SkillTestPage() {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("locallens-signal", JSON.stringify(data));
     }
-    router.push("/signal-profile");
+    router.push("/passport");
   }
 
   const accuracyOptions = ["Accurate", "Partly wrong", "Inaccurate", "Not sure"];
@@ -57,7 +57,7 @@ export default function SkillTestPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Progress */}
       <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
-        <ProgressStepper current={2} />
+        <ProgressStepper current={4} />
       </div>
 
       {/* Header */}

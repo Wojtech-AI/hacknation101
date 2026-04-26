@@ -69,6 +69,53 @@ export type Job = {
   fairPayScore: number;
   riskLevel: "Low" | "Medium" | "High";
   growthValue: string;
+  // ─── Phase 0.1 annotations ─────────────────────────────────────────────
+  // Optional so existing callers (tests, leaderboard mocks) keep type-checking.
+  // Populated for the 6 prototype jobs in mockData.ts.
+
+  /** ILO ISCO-08 4-digit unit-group code; resolves through ISCO08_CATALOG. */
+  isco08?: string;
+  /** ESCO skill clusters this job genuinely requires. Drives the matcher's
+   *  primary "skill overlap" score against the candidate's
+   *  inferredEscoSkills vector. Codes resolve through ESCO_CATALOG. */
+  requiredEscoSkills?: string[];
+  /** Writing systems the job's outputs must be produced in. Empty/absent
+   *  means script-agnostic (any Latin-keyboard candidate is fine). */
+  requiredScripts?: string[];
+  /** Minimum CEFR level required for at least one language matching
+   *  `requiredLanguages`. Defaults to "B1" when absent. */
+  minLanguageLevel?: "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+  /** Hard minimum weekly availability for the job. */
+  minWeeklyHours?: number;
+  /** Dialect names that get a soft-score bonus when the candidate has
+   *  them (e.g. "Bahian Portuguese" for cultural-context jobs in Salvador). */
+  preferredDialects?: string[];
+  /**
+   * Culture-specific framing of an otherwise abstract job. Lets us keep one
+   * job spec (level / ESCO / pay) while surfacing a concrete, locally-true
+   * version of the work to the user — e.g. "AI response review" becomes
+   * "MoMo / WhatsApp agent-scam reply review" for a Ghanaian user, "Pix
+   * golpe message review" for a Brazilian user, "M-Pesa fake-pay screenshot
+   * review" for a Kenyan user, etc.
+   *
+   * Keys are CountryId; missing keys fall back to the generic title /
+   * description. Surfaced by /jobs as a "Your lane:" callout below the
+   * generic header so users immediately see the work in their own context.
+   */
+  culturalLanes?: Record<
+    string,
+    {
+      /** Country-tailored variant of `title`. Optional. */
+      title?: string;
+      /** Country-tailored variant of `description`. Optional. */
+      description?: string;
+      /** "Your lane" sentence — concrete examples of what this job means
+       *  in this country (MoMo agent fraud, matatu route descriptions, …). */
+      lane: string;
+      /** DomainTag-equivalent strings for chip rendering. */
+      domains?: string[];
+    }
+  >;
 };
 
 export type Passport = {

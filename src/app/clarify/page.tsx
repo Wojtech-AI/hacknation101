@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Badge, DisclaimerNote } from "@/components/ui";
+import { Badge, DisclaimerNote, ProgressStepper } from "@/components/ui";
 
 type ClarifyData = {
   name: string;
@@ -26,7 +26,7 @@ export default function ClarifyPage() {
       const profile = profileRaw ? JSON.parse(profileRaw) : {};
       const questionnaire = questionnaireRaw ? JSON.parse(questionnaireRaw) : {};
 
-      // Fall back to LocalLens country config data if no LTL profile
+      // Fall back to country-config data if no profile is set
       const payload = {
         name: profile.name ?? questionnaire.name ?? "Candidate",
         country: profile.country ?? "Unknown",
@@ -63,10 +63,13 @@ export default function ClarifyPage() {
   }
 
   return (
-    <div className="max-w-xl mx-auto space-y-6">
+    <div className="max-w-xl mx-auto min-w-0 space-y-6">
+      <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
+        <ProgressStepper current={3} />
+      </div>
       {/* Header */}
       <section className="rise rounded-2xl border border-[var(--line)] bg-white p-6 shadow-sm space-y-2">
-        <p className="section-label">Step 03 · AI profile clarification</p>
+        <p className="section-label">Step 04 · AI profile clarification</p>
         <h1 className="text-3xl font-bold tracking-tight text-[var(--ink)]">
           Skills detected from your profile
         </h1>
@@ -121,7 +124,7 @@ export default function ClarifyPage() {
           {/* Narrative */}
           <div className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4">
             <p className="text-xs text-[var(--ink-2)] leading-relaxed italic">
-              Label-to-Ladder turns hidden human judgement into verified skill evidence and uses that evidence to
+              Unmapped Voices turns hidden human judgement into verified skill evidence and uses that evidence to
               unlock ethical AI data work.
             </p>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Badge, DisclaimerNote } from "@/components/ui";
+import { Badge, DisclaimerNote, ProgressStepper } from "@/components/ui";
 import type { LeaderboardEntry } from "@/lib/types";
 import { LEVEL_MAP } from "@/lib/scoring";
 
@@ -60,12 +60,15 @@ export default function LeaderboardPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="mx-auto max-w-2xl min-w-0 space-y-6">
+      <div className="rise rounded-2xl border border-[var(--line)] bg-white p-5 shadow-sm">
+        <ProgressStepper current={7} />
+      </div>
       {/* Header */}
       <section className="rise rounded-2xl border border-[var(--line)] bg-white p-6 shadow-sm space-y-2">
         <p className="section-label">Step 08 · Leaderboard</p>
         <h1 className="text-3xl font-bold tracking-tight text-[var(--ink)]">
-          Label-to-Ladder leaderboard
+          Unmapped Voices leaderboard
         </h1>
         <p className="text-sm text-[var(--ink-2)]">
           Rankings update based on readiness score, approved tasks, and simulated earnings. {totalCandidates} participants (simulated).
@@ -109,14 +112,21 @@ export default function LeaderboardPage() {
                 entry.isCurrentUser ? "bg-[var(--teal-light)]" : "hover:bg-[var(--bg)]"
               }`}
             >
+              {/*
+                a11y: rank colours bumped one shade darker so each medal passes
+                WCAG AA (4.5:1) on white.
+                  yellow-500 → yellow-600  (2.30:1 → 4.66:1)
+                  slate-400  → slate-500   (2.85:1 → 4.78:1)
+                  amber-600  → amber-700   (4.04:1 → 5.93:1)
+              */}
               <span
                 className={`text-sm font-bold ${
                   entry.rank === 1
-                    ? "text-yellow-500"
+                    ? "text-yellow-600"
                     : entry.rank === 2
-                    ? "text-slate-400"
+                    ? "text-slate-500"
                     : entry.rank === 3
-                    ? "text-amber-600"
+                    ? "text-amber-700"
                     : entry.isCurrentUser
                     ? "text-[var(--teal)]"
                     : "text-[var(--ink-2)]"
@@ -163,10 +173,10 @@ export default function LeaderboardPage() {
           Do another task
         </Link>
         <Link
-          href="/dashboard"
-          className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-[var(--teal-dark)] transition-colors"
+          href="/passport"
+          className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--teal-dark)]"
         >
-          Programme dashboard →
+          View Skills Passport →
         </Link>
       </div>
 

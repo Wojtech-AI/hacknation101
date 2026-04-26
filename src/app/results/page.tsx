@@ -118,16 +118,16 @@ export default function ResultsPage() {
 
       <div className="flex gap-3">
         <Link
-          href="/tasks"
-          className="flex-1 rounded-xl border border-[var(--line)] bg-white px-4 py-2.5 text-center text-sm font-medium text-[var(--ink)] hover:bg-[var(--bg)] transition-colors"
+          href="/jobs"
+          className="flex-1 rounded-xl border border-[var(--line)] bg-white px-4 py-2.5 text-center text-sm font-medium text-[var(--ink)] transition-colors hover:bg-[var(--bg)]"
         >
-          More tasks
+          Matched jobs
         </Link>
         <Link
-          href="/dashboard"
-          className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-[var(--teal-dark)] transition-colors"
+          href="/passport"
+          className="flex-1 rounded-xl bg-[var(--teal)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--teal-dark)]"
         >
-          View dashboard →
+          View Skills Passport →
         </Link>
       </div>
 

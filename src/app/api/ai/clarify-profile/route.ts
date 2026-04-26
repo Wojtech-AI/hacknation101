@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     recommendedAreas.push("Scam and misinformation detection");
 
     // AI clarification message
-    const clarificationMessage = `Based on your profile from ${country ?? "your community"}, LocalLens has detected strong potential for AI data evaluation work. Your ${languages.length > 1 ? `multilingual background (${languages.join(", ")}) is` : "language background is"} a valued signal. The micro-skill test below will verify your readiness level and generate your Skills Passport.`;
+    const clarificationMessage = `Based on your profile from ${country ?? "your community"}, Unmapped Voices has detected strong potential for AI data evaluation work. Your ${languages.length > 1 ? `multilingual background (${languages.join(", ")}) is` : "language background is"} a valued signal. The micro-skill test below will verify your readiness level and generate your Skills Passport.`;
 
     return NextResponse.json(
       ok({

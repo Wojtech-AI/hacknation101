@@ -1,6 +1,10 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import type { CountryConfig } from "@/lib/countryConfigs";
+import { SUPPORTED_LOCALES } from "@/lib/i18n";
+import { useT } from "@/lib/LocaleProvider";
+import LanguagePicker from "@/components/LanguagePicker";
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 
@@ -35,16 +39,10 @@ export function Badge({
 // ─── LocaleBadge ─────────────────────────────────────────────────────────────
 
 export function LocaleBadge({ locale }: { locale: string }) {
-  const labels: Record<string, string> = {
-    en: "English",
-    fr: "Français",
-    pt: "Português",
-    es: "Español",
-    sw: "Kiswahili",
-  };
+  const meta = (SUPPORTED_LOCALES as Record<string, { nativeName: string; flag: string }>)[locale];
   return (
     <Badge variant="outline" className="font-mono">
-      🌐 {labels[locale] ?? locale}
+      {meta ? `${meta.flag} ${meta.nativeName}` : `🌐 ${locale}`}
     </Badge>
   );
 }
@@ -77,8 +75,86 @@ export function DisclaimerNote({ text }: { text?: string }) {
       <span className="text-amber-500 mt-0.5 shrink-0">⚠</span>
       <p className="text-xs text-amber-800 leading-relaxed">
         {text ??
-          "Prototype demo: partner names, payments, task volumes, labour-market figures, and dashboard data are simulated for demonstration purposes."}
+          "Prototype demo: partner names, payments, task volumes, and labour-market figures are simulated for demonstration purposes."}
       </p>
+    </div>
+  );
+}
+
+// ─── BrandMark ───────────────────────────────────────────────────────────────
+// Compact "Unmapped Voices" glyph for header / footer use.
+// Reads as: two facing voices with a waveform between them.
+
+export function BrandMark({
+  size = 28,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      className={className}
+    >
+      <rect width="32" height="32" rx="8" fill="var(--forest)" />
+      {/* left voice arc — sea green */}
+      <path
+        d="M11 9.5 Q6.5 16 11 22.5"
+        stroke="var(--sea)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* right voice arc — lime */}
+      <path
+        d="M21 9.5 Q25.5 16 21 22.5"
+        stroke="var(--lime)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* waveform — three bars, cream */}
+      <line x1="14" y1="13" x2="14" y2="19" stroke="var(--cream)" strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="16" y1="10.5" x2="16" y2="21.5" stroke="var(--cream)" strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="18" y1="14" x2="18" y2="18" stroke="var(--cream)" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// ─── BrandWordmark ───────────────────────────────────────────────────────────
+
+export function BrandWordmark({
+  size = "md",
+  showTagline = false,
+}: {
+  size?: "sm" | "md" | "lg";
+  showTagline?: boolean;
+}) {
+  const titleClass =
+    size === "lg"
+      ? "text-2xl"
+      : size === "sm"
+        ? "text-sm"
+        : "text-lg";
+  return (
+    <div className="flex items-center gap-2.5">
+      <BrandMark size={size === "lg" ? 36 : size === "sm" ? 22 : 28} />
+      <div className="flex flex-col leading-none">
+        <span className={`brand-wordmark ${titleClass}`}>
+          Unmapped <span className="brand-leaf">Voices</span>
+        </span>
+        {showTagline && (
+          <span className="mt-1 text-[10px] uppercase tracking-[0.18em] text-[var(--ink-2)]">
+            Making language skills visible &amp; valuable
+          </span>
+        )}
+      </div>
     </div>
   );
 }
@@ -86,45 +162,59 @@ export function DisclaimerNote({ text }: { text?: string }) {
 // ─── HeaderNav ───────────────────────────────────────────────────────────────
 
 export function HeaderNav() {
+  const { t } = useT();
+  const [menuOpen, setMenuOpen] = useState(false);
+  /** Hackathon nav: only surfaces on the submission path (no dashboard, pitch, or demo CTA). */
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/onboarding", label: "Get Started" },
-    { href: "/test", label: "Skill Test" },
-    { href: "/passport", label: "Passport" },
-    { href: "/jobs", label: "Jobs" },
-    { href: "/leaderboard", label: "Leaderboard" },
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/pitch", label: "For Judges" },
+    { href: "/", label: t("nav.home") },
+    { href: "/passport", label: t("nav.passport") },
+    { href: "/jobs", label: t("nav.jobs") },
+    { href: "/leaderboard", label: t("nav.leaderboard") },
   ];
+  const linkClass =
+    "rounded-lg px-3 py-2 text-sm font-medium text-[var(--ink-2)] hover:bg-[var(--teal-light)] hover:text-[var(--teal)] transition-colors break-words text-left md:text-center md:py-1.5";
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--cream)]/90 backdrop-blur-md">
+      <div className="mx-auto flex min-w-0 max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold text-[var(--teal)] tracking-tight text-lg"
+          className="min-w-0 shrink"
+          onClick={() => setMenuOpen(false)}
         >
-          <span className="inline-block w-6 h-6 rounded-lg bg-[var(--teal)] text-white flex items-center justify-center text-xs font-black">
-            L
-          </span>
-          LocalLens
+          <BrandWordmark size="md" />
         </Link>
-        <nav className="hidden sm:flex items-center gap-1">
+        <div className="flex shrink-0 items-center gap-2">
+          <LanguagePicker variant="compact" showResetWhenManual={false} />
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--line)] text-[var(--ink)] hover:bg-[var(--bg)] md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="site-primary-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span className="sr-only">{menuOpen ? "Close" : "Menu"}</span>
+            <span aria-hidden className="text-lg leading-none">
+              {menuOpen ? "×" : "≡"}
+            </span>
+          </button>
+        </div>
+        <nav
+          id="site-primary-nav"
+          className={`${menuOpen ? "flex" : "hidden"} basis-full flex-col gap-0.5 border-t border-[var(--line)] pt-3 md:basis-auto md:flex md:flex-row md:items-center md:gap-1 md:border-t-0 md:pt-0`}
+          aria-label="Primary"
+        >
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-lg px-3 py-1.5 text-sm font-medium text-[var(--ink-2)] hover:bg-[var(--teal-light)] hover:text-[var(--teal)] transition-colors"
+              className={linkClass}
+              onClick={() => setMenuOpen(false)}
             >
               {l.label}
             </Link>
           ))}
         </nav>
-        <Link
-          href="/onboarding"
-          className="hidden sm:block rounded-lg bg-[var(--teal)] px-3.5 py-1.5 text-sm font-semibold text-white hover:bg-[var(--teal-dark)] transition-colors"
-        >
-          Start Demo
-        </Link>
       </div>
     </header>
   );
@@ -132,52 +222,62 @@ export function HeaderNav() {
 
 // ─── ProgressStepper ─────────────────────────────────────────────────────────
 
+/** Submission journey through the hackathon demo (annotation sits after Jobs). */
 const STEPS = [
   { label: "Profile", href: "/onboarding" },
-  { label: "Questionnaire", href: "/questionnaire" },
-  { label: "Skill Test", href: "/skill-test" },
-  { label: "Signal Profile", href: "/signal-profile" },
-  { label: "Tasks", href: "/tasks" },
+  { label: "Survey", href: "/questionnaire" },
+  { label: "Probe", href: "/probe" },
+  { label: "Review", href: "/clarify" },
+  { label: "Test", href: "/test" },
+  { label: "Passport", href: "/passport" },
+  { label: "Jobs", href: "/jobs" },
+  { label: "Board", href: "/leaderboard" },
 ];
 
 export function ProgressStepper({ current }: { current: number }) {
   return (
-    <div className="flex items-center gap-0">
-      {STEPS.map((step, i) => {
-        const done = i < current;
-        const active = i === current;
-        return (
-          <div key={step.label} className="flex items-center flex-1 min-w-0">
-            <div className="flex flex-col items-center">
-              <div
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all ${
-                  done
-                    ? "bg-[var(--teal)] text-white"
-                    : active
-                    ? "bg-white border-2 border-[var(--teal)] text-[var(--teal)]"
-                    : "bg-white border-2 border-[var(--line)] text-[var(--ink-2)]"
-                }`}
+    <div className="w-full overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:thin]">
+      <div className="flex min-w-max items-center sm:min-w-0 sm:w-full">
+        {STEPS.map((step, i) => {
+          const done = i < current;
+          const active = i === current;
+          return (
+            <div key={step.href} className="flex min-w-[4.25rem] max-w-[6rem] flex-1 items-center sm:min-w-0 sm:max-w-none">
+              <Link
+                href={step.href}
+                className="flex w-full min-w-0 flex-col items-center px-0.5 text-inherit no-underline"
               >
-                {done ? "✓" : i + 1}
-              </div>
-              <span
-                className={`mt-1 text-[10px] font-medium whitespace-nowrap ${
-                  active ? "text-[var(--teal)]" : done ? "text-[var(--teal-dark)]" : "text-[var(--ink-2)]"
-                }`}
-              >
-                {step.label}
-              </span>
+                <div
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all ${
+                    done
+                      ? "bg-[var(--teal)] text-white"
+                      : active
+                        ? "border-2 border-[var(--teal)] bg-white text-[var(--teal)]"
+                        : "border-2 border-[var(--line)] bg-white text-[var(--ink-2)]"
+                  }`}
+                >
+                  {done ? "✓" : i + 1}
+                </div>
+                <span
+                  className={`mt-1 w-full text-center text-[9px] font-medium leading-snug break-words sm:text-[10px] ${
+                    active ? "text-[var(--teal)]" : done ? "text-[var(--teal-dark)]" : "text-[var(--ink-2)]"
+                  }`}
+                >
+                  {step.label}
+                </span>
+              </Link>
+              {i < STEPS.length - 1 && (
+                <div
+                  className={`mx-0.5 h-0.5 w-4 shrink-0 rounded-full sm:mx-1 sm:flex-1 sm:min-w-[0.25rem] ${
+                    done ? "bg-[var(--teal)]" : "bg-[var(--line)]"
+                  }`}
+                  aria-hidden
+                />
+              )}
             </div>
-            {i < STEPS.length - 1 && (
-              <div
-                className={`h-0.5 flex-1 mx-1 rounded-full transition-all ${
-                  done ? "bg-[var(--teal)]" : "bg-[var(--line)]"
-                }`}
-              />
-            )}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -422,7 +522,8 @@ export function TaskCard({ task, showBreakdown = false }: { task: Task; showBrea
 // ─── LabourMarketPanel ────────────────────────────────────────────────────────
 
 export function LabourMarketPanel({ config }: { config: CountryConfig }) {
-  const { labourSignals, country, region, wageBenchmark } = config;
+  const { labourSignals, country, region, wageBenchmark, labourCitation } =
+    config;
   const items = [
     { label: "Youth NEET rate", value: labourSignals.youthNEET },
     { label: "Informal employment", value: labourSignals.informalEmployment },
@@ -434,11 +535,10 @@ export function LabourMarketPanel({ config }: { config: CountryConfig }) {
   return (
     <div className="rounded-2xl border border-[var(--line)] bg-white p-5 space-y-4">
       <div>
-        <p className="section-label">ILOSTAT-style labour signals</p>
+        <p className="section-label">Labour-market signals</p>
         <h3 className="font-semibold text-[var(--ink)] mt-0.5">
           {country} · {region}
         </h3>
-        <p className="text-xs text-[var(--ink-2)]">Simulated pilot data</p>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {items.map((item) => (
@@ -448,6 +548,12 @@ export function LabourMarketPanel({ config }: { config: CountryConfig }) {
           </div>
         ))}
       </div>
+      <p className="text-[11px] text-[var(--ink-2)] italic">
+        {labourCitation} ·{" "}
+        <a href="/sources" className="hover:underline not-italic">
+          methodology
+        </a>
+      </p>
     </div>
   );
 }
@@ -458,20 +564,20 @@ export function ChallengeAlignment() {
   const columns = [
     {
       title: "Broken Signals",
-      body: "Local knowledge, language judgement, slang, culture, and lived experience rarely appear in formal credentials. LocalLens converts them into evidence-backed skill signals.",
+      body: "Local knowledge, language judgement, slang, culture, and lived experience rarely appear in formal credentials. Unmapped Voices converts them into evidence-backed skill signals.",
     },
     {
       title: "AI Disruption",
-      body: "AI is creating new demand for human evaluation, but access is uneven. LocalLens gives credential-invisible youth a proof-of-skill route into AI work.",
+      body: "AI is creating new demand for human evaluation, but access is uneven. Unmapped Voices gives credential-invisible youth a proof-of-skill route into AI work.",
     },
     {
       title: "No Matching Infrastructure",
-      body: "LocalLens connects verified local-context evaluators to fair AI data tasks while giving programme officers visibility into talent, training gaps, and fair-work outcomes.",
+      body: "Unmapped Voices connects verified local-context evaluators to fair AI data tasks while giving programme officers visibility into talent, training gaps, and fair-work outcomes.",
     },
   ];
   return (
     <div className="rounded-2xl border border-[var(--line)] bg-white p-6 space-y-5">
-      <SectionHeading label="Challenge response" title="How LocalLens answers UNMAPPED" />
+      <SectionHeading label="Challenge response" title="How Unmapped Voices answers UNMAPPED" />
       <div className="grid sm:grid-cols-3 gap-4">
         {columns.map((col) => (
           <div key={col.title} className="rounded-xl bg-[var(--bg)] p-4 space-y-2">
@@ -481,7 +587,7 @@ export function ChallengeAlignment() {
         ))}
       </div>
       <p className="text-xs text-[var(--ink-2)] italic border-t border-[var(--line)] pt-3">
-        Prototype modules built: Skills Signal Engine + Opportunity Matching &amp; Econometric Dashboard.
+        Prototype modules built: Skills Signal Engine + opportunity matching + fair-work signals.
       </p>
     </div>
   );
@@ -502,8 +608,8 @@ export function FairDataVision() {
       <SectionHeading label="Vision" title="Toward Fair Data" />
       <p className="text-sm text-[var(--ink-2)] leading-relaxed max-w-2xl">
         Fairtrade changed how companies think about sourcing coffee and cocoa. AI now needs the same conversation for
-        data. LocalLens is a prototype for fair, community-verified AI data sourcing: people are paid for their local
-        knowledge, tasks are screened for fairness, and every completed task becomes portable evidence of skill.
+        data. Unmapped Voices is a prototype for fair, community-verified AI data sourcing: people are paid for their
+        local knowledge, tasks are screened for fairness, and every completed task becomes portable evidence of skill.
       </p>
       <div className="flex flex-wrap gap-2 pt-1">
         {pillars.map((p) => (

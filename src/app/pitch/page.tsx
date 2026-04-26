@@ -13,7 +13,7 @@ const solution = [
   "A 10-question local-context questionnaire captures language, culture, and lived experience.",
   "A micro skill test generates an ESCO-mapped Signal Profile as portable proof of skill.",
   "A Fair Work Task Hub matches users to screened, transparent AI evaluation tasks.",
-  "A programme dashboard gives officers ILOSTAT-style labour signals and fair-work monitoring.",
+  "Labour-market context (ILO / World Bank / Wittgenstein) still powers matching and copy on task hubs.",
 ];
 
 const whyNow = [
@@ -26,7 +26,7 @@ const whyWins = [
   "No API keys, no databases — runs entirely in-browser as a clickable proof of concept.",
   "10 country configs with ILOSTAT-style signals demonstrate real scalability.",
   "Fairtrade-style ethics built into the product from day one.",
-  "Judges can click through the full journey: onboard → test → profile → task → dashboard.",
+  "Judges can follow the path: profile → questionnaire → probe → test → passport → jobs → annotation → leaderboard.",
 ];
 
 const modules = [
@@ -38,7 +38,7 @@ const modules = [
   "Fair Work Task Hub with score breakdowns",
   "Task activity + submission",
   "Results + progression ladder",
-  "Programme officer dashboard (country-configurable)",
+  "Country-configurable labour signals (surfaced on task hubs and sources)",
   "Judge summary page (this page)",
 ];
 
@@ -52,10 +52,10 @@ export default function PitchPage() {
         </div>
         <Badge variant="teal">UNMAPPED Challenge · Judge Summary</Badge>
         <h1 className="text-4xl font-bold tracking-tight text-[var(--ink)] leading-tight">
-          LocalLens
+          Unmapped <span className="text-[var(--lime-dark)]">Voices</span>
         </h1>
         <p className="text-xl font-semibold text-[var(--teal)]">
-          Turning local knowledge into fair AI work
+          Making language skills visible and valuable
         </p>
         <p className="text-sm text-[var(--ink-2)] max-w-xl mx-auto leading-relaxed">
           Community-verified AI data, proof-of-skill screening, and fair pathways into the AI economy.
@@ -64,7 +64,7 @@ export default function PitchPage() {
           href="/onboarding"
           className="inline-block rounded-xl bg-[var(--teal)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--teal-dark)] transition-colors"
         >
-          Start the full demo journey →
+          Start submission journey →
         </Link>
       </section>
 

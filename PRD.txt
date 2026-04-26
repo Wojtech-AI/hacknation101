@@ -1,0 +1,517 @@
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
+Label-to-Ladder: Turning AI Data Work into a Fair Skills Pathway for Credential-Invisible Youth
+
+Version: 1.0
+Purpose: Hack-Nation AI Challenge / World Bank Youth Summit-linked submission
+Format: Holistic concept overview only — no technical stack detail
+
+
+1. EXECUTIVE SUMMARY
+
+Label-to-Ladder is a public-interest skills infrastructure layer that helps digitally reachable but credential-invisible young people in low- and middle-income countries enter the AI economy through fair, paid AI annotation and evaluation work.
+
+The core idea is simple: many young people do not have formal degrees or recognised credentials, but they do have valuable human judgement. They understand their language, culture, slang, local context, tone, common mistakes, sector-specific realities, and what sounds right or wrong in their community. These capabilities are increasingly valuable to AI companies that need human input to improve model quality, local-language performance, cultural relevance, and factual reliability.
+
+However, the current route into AI data work is messy, often degree-filtered, poorly governed, and can risk becoming invisible low-paid digital labour. Label-to-Ladder addresses this by replacing lazy credential proxies with proof-of-skill screening, fair-work safeguards, portable skill evidence, and progression pathways.
+
+The platform does not aim to become another annotation marketplace. Instead, it acts as the missing operating layer before and after annotation tasks: it identifies talent, screens readiness, matches people to safe and fair AI data-work opportunities, converts completed work into verified skill evidence, and helps the strongest performers progress into higher-value roles such as AI output evaluator, fact-checking reviewer, local-language QA specialist, domain trainer, community mentor, or data operations lead.
+
+
+2. THE PROBLEM
+
+AI companies increasingly need human feedback, language evaluation, cultural-context judgement, fact-checking, and domain-specific annotation. Yet many young people who could contribute to this work are excluded because hiring systems rely on weak proxies such as degrees, elite education, formal employment history, English-language CVs, or existing online portfolios.
+
+This creates three linked failures:
+
+1. Broken skill signals
+A degree is often used as a proxy for readiness, even when the actual work requires measurable capabilities such as language judgement, attention to detail, grammar, instruction-following, fact-checking, and cultural awareness. Many people can demonstrate these capabilities but cannot prove them through traditional credentials.
+
+2. Unequal access to the AI economy
+AI is creating new forms of work, but entry routes are often hidden, informal, platform-dependent, or biased toward those already connected to global digital labour markets. Credential-invisible youth may have the ability to contribute but lack a trusted pathway in.
+
+3. Risk of exploitative data labour
+AI annotation and data evaluation can create income, but without safeguards it may become a cheap-labour pipeline. Workers may complete low-paid tasks without understanding how their data is used, without progression, without portable recognition, and without a route into better AI/data roles.
+
+Label-to-Ladder reframes AI annotation as the first rung of a skills ladder, not the final destination.
+
+
+3. TARGET USERS
+
+Primary user:
+Digitally reachable but credential-invisible young people in low- and middle-income countries.
+
+These users may:
+- Have access to a smartphone, internet café, shared computer, school computer, or community centre.
+- Speak one or more local, regional, or international languages.
+- Understand local slang, culture, customs, social norms, food, services, and everyday realities.
+- Have informal work experience, hobbies, interests, or domain knowledge that could be useful for AI evaluation.
+- Lack formal credentials, recognised work history, elite networks, or a conventional CV.
+- Be capable of entry-level AI data work if screened and supported properly.
+
+Example user:
+A young person in Madagascar, Ghana, Brazil, India, Kenya, or another LMIC who speaks local languages, uses mobile internet, understands their community context, and can judge whether AI-generated text sounds natural, accurate, culturally appropriate, or misleading.
+
+Secondary users:
+- AI data companies needing local-language, cultural, and domain-specific human evaluation.
+- NGOs, training providers, and community organisations supporting youth employment.
+- Governments and development agencies seeking labour-market intelligence and youth-employment pathways.
+- World Bank-style programme teams interested in inclusive digital work, AI readiness, and skills infrastructure.
+
+
+4. CORE VALUE PROPOSITION
+
+For young people:
+Label-to-Ladder gives people a fair way to prove capability without needing a degree filter. It turns language, culture, judgement, attention to detail, and local knowledge into recognised skill evidence. Every completed task becomes both income and proof of skill.
+
+For AI companies:
+The platform provides pre-screened, quality-tested, local-language and culturally aware contributors. It helps companies access underrepresented languages and local knowledge while improving responsible sourcing and worker progression.
+
+For governments and development partners:
+The platform creates a live view of hidden AI-ready talent, language coverage gaps, training needs, and progression potential. It helps transform AI data work from fragmented gig labour into a structured youth-employment and skills-development pathway.
+
+Core proposition:
+“The bachelor’s degree is often used as a proxy for readiness. Label-to-Ladder measures readiness directly.”
+
+
+5. PRODUCT VISION
+
+Label-to-Ladder is an open, country-configurable operating layer for ethical AI data work.
+
+It begins with a guided conversational AI screener that asks users about their country, languages, culture, interests, hobbies, domain knowledge, education, digital access, and comfort with tasks such as grammar checking, factual verification, AI output rating, and cultural-context judgement.
+
+The screener then uses mini evaluation tasks to assess practical readiness. Users are not simply asked to claim skills; they demonstrate them.
+
+The system generates a Skills Passport that includes:
+- Language judgement signals.
+- Cultural-context signals.
+- Domain familiarity.
+- Fact-checking readiness.
+- AI-output evaluation readiness.
+- Attention to detail.
+- Instruction-following.
+- Confidence level.
+- Evidence collected.
+- Recommended next step.
+
+Users are then matched to fair AI data-work pathways, such as:
+- Local-language response evaluation.
+- Grammar and fluency checking.
+- Transcription review.
+- AI output rating.
+- Factual verification.
+- Cultural-context review.
+- Domain-specific annotation.
+- Quality review.
+- Community training.
+
+Each opportunity is assessed through a Fair Work Score to ensure the platform does not become a cheap-labour pipeline.
+
+
+6. GUIDING PRINCIPLES
+
+1. Proof over proxy
+The product should assess real capability rather than rely on degrees or formal job titles.
+
+2. Entry-level does not mean low-value
+AI annotation may not always require a degree, but it still requires real human judgement: language fluency, cultural awareness, accuracy, attention, and reasoning.
+
+3. Annotation is the first rung, not the end point
+The goal is not to trap people in low-level data work. The goal is to create progression into better AI/data roles.
+
+4. Every task should become evidence
+Completed work should contribute to a portable skill record that can be used for future opportunities.
+
+5. Fair work by design
+The system should surface pay, risk, progression value, and task conditions clearly.
+
+6. Local context is valuable
+Local slang, culture, lived experience, and domain knowledge are not side details. They are core AI-evaluation assets.
+
+7. Candidate control and dignity
+Users should understand what they are sharing, why it matters, and how it will be used. They should control what becomes visible to partners.
+
+8. Infrastructure, not just an app
+The system should be designed as a reusable layer that governments, NGOs, employers, and annotation companies can plug into.
+
+
+7. CORE PRODUCT JOURNEY
+
+Step 1: Country and language onboarding
+The user begins by identifying where they are from, what languages they speak, what they can read/write, and what cultural or local contexts they understand.
+
+Example prompts:
+- What country or community are you from?
+- What languages do you speak comfortably?
+- Which languages can you read and write?
+- Are there local phrases, slang, foods, customs, or social norms that outsiders often misunderstand?
+
+Step 2: Interest and domain mapping
+The system asks about hobbies, lived experience, informal work, interests, and topics the user understands.
+
+Example areas:
+- Food and culture.
+- Farming.
+- Local commerce.
+- Mobile money.
+- Phone repair.
+- Football.
+- Education.
+- Transport.
+- Health.
+- Small business.
+- Local government services.
+- Online selling.
+- Religious or cultural practices, where voluntarily and appropriately shared.
+
+Step 3: Conversational probing
+The AI asks clarifying questions to uncover useful skill signals. The goal is not to collect generic data, but to understand the user’s real judgement and context.
+
+Example:
+If a user says they understand mobile money, the system may ask:
+- What mistakes do people commonly make when using mobile money in your community?
+- Could you tell if an AI answer about mobile money fraud is unrealistic or unsafe?
+
+Step 4: Mini readiness tests
+The user completes practical tasks:
+- Correct a grammatically weak AI output.
+- Choose which AI answer sounds more natural.
+- Identify a factual error.
+- Apply a simple annotation rule.
+- Spot a cultural mismatch.
+- Explain why a response sounds wrong.
+
+Step 5: Skill Passport generation
+The system generates a profile showing the user’s demonstrated skill signals, evidence, confidence level, and recommended starting level.
+
+Example skill signals:
+- Language judgement.
+- Grammar and fluency.
+- Cultural-context awareness.
+- AI-output evaluation.
+- Fact-checking readiness.
+- Domain familiarity.
+- Attention to detail.
+- Instruction-following.
+- Learning commitment.
+
+Step 6: Fair task matching
+The user is matched to suitable AI data-work opportunities based on readiness level, language, domain, risk tolerance, and training needs.
+
+Example matches:
+- Level 1: Local-language grammar and fluency checking.
+- Level 2: AI output rating.
+- Level 3: Fact-checking assistant.
+- Level 4: Local-language and cultural QA reviewer.
+- Level 5: Domain-specific AI trainer.
+- Level 6: Data quality lead or community trainer.
+
+Step 7: Work becomes evidence
+Completed tasks are logged as evidence. Performance, accuracy, consistency, improvement after feedback, and task diversity help the user progress.
+
+Step 8: Progression and upskilling
+The system recommends training modules and unlocks higher-value work based on demonstrated performance.
+
+Step 9: Policy and partner dashboard
+Aggregated, privacy-conscious insights show hidden talent clusters, language coverage gaps, training needs, and fair-work risks.
+
+
+8. KEY FEATURES
+
+8.1 Conversational Skill Screener
+A guided AI conversation that helps users reveal language, culture, local knowledge, interests, domain familiarity, and task readiness.
+
+Purpose:
+To replace generic CV forms with a structured, human-centred discovery process.
+
+8.2 Proof-of-Skill Readiness Test
+A practical test that checks whether the user can perform entry-level AI data-work tasks.
+
+Assesses:
+- Reading and writing clarity.
+- Grammar correction.
+- Local-language judgement.
+- Cultural-context recognition.
+- Basic fact-checking.
+- Instruction-following.
+- Attention to detail.
+- AI output evaluation.
+
+8.3 Skills Passport
+A portable profile showing what the user can credibly do, based on evidence and performance rather than formal credentials alone.
+
+Includes:
+- Skill signal.
+- Evidence source.
+- Confidence level.
+- Suggested verification.
+- Current readiness level.
+- Recommended pathway.
+
+8.4 Fair Work Score
+A safeguard system that evaluates each task before recommending it.
+
+Potential criteria:
+- Pay transparency.
+- Local wage benchmark comparison.
+- Estimated hourly equivalent.
+- Harmful content risk.
+- Skill-building value.
+- Worker support.
+- Data-use transparency.
+- Progression value.
+- Credential value.
+
+8.5 Label-to-Ladder Progression Pathway
+A structured career ladder that helps users move from entry-level annotation to higher-value roles.
+
+Possible levels:
+- Level 0: AI work-ready candidate.
+- Level 1: Data annotator.
+- Level 2: AI output evaluator.
+- Level 3: Fact-checking reviewer.
+- Level 4: Local-language QA specialist.
+- Level 5: Domain-specific AI trainer.
+- Level 6: Data quality lead / community trainer.
+
+8.6 Partner Task Connector
+A layer that could connect screened users to existing AI annotation/data-work companies, rather than building a marketplace from scratch.
+
+Purpose:
+To work with existing providers while adding fairness, screening, progression, and public-interest oversight.
+
+8.7 Policy and Programme Dashboard
+A dashboard for governments, NGOs, funders, or World Bank-style programme teams.
+
+Displays:
+- Number of users screened.
+- Readiness levels.
+- Language coverage.
+- Common training gaps.
+- Local domain expertise.
+- Progression rates.
+- Fair-work risk flags.
+- Talent clusters by region or language.
+- Potential partners or training needs.
+
+
+9. EXAMPLE USE CASE
+
+User:
+A young Malagasy/French speaker in Madagascar with no university degree but strong writing ability, cultural knowledge, and mobile internet access.
+
+Journey:
+1. The user enters the platform and selects Madagascar, Malagasy, and French.
+2. The system asks about local culture, interests, language use, and digital habits.
+3. The user completes a short grammar and AI-output evaluation test.
+4. The system identifies medium-to-high readiness for local-language AI response evaluation.
+5. The user receives a Skills Passport showing language judgement, cultural-context awareness, attention to detail, and AI-evaluation readiness.
+6. The system recommends Level 1 local-language annotation and Level 2 AI output evaluation training.
+7. The user completes paid tasks through a vetted partner.
+8. Performance is recorded as evidence.
+9. After consistent high-quality work, the user is recommended for reviewer training.
+10. Aggregated dashboard data shows development partners that there is a growing pool of Malagasy/French AI-evaluation talent.
+
+Outcome:
+The user gains income, a recognised AI data-work profile, and a route into higher-value digital work. AI companies gain better local-language evaluation. Policymakers gain insight into hidden youth talent.
+
+
+10. COUNTRY-AGNOSTIC DESIGN
+
+Label-to-Ladder should be configurable across countries and languages.
+
+The prototype can demonstrate one primary context and one reconfiguration context.
+
+Recommended primary context:
+Madagascar
+Reason:
+Madagascar provides a strong AI annotation and language-evaluation narrative, especially around Malagasy and French. It also helps highlight the risks and opportunities of AI data outsourcing.
+
+Recommended reconfiguration context:
+Ghana
+Reason:
+Ghana connects well to the Amara case study, with English, Twi, Ga, mobile-money familiarity, phone repair, local commerce, and digitally reachable youth.
+
+Configurable elements:
+- Country.
+- Language(s).
+- Wage benchmark.
+- Education context.
+- Local domains.
+- Cultural prompts.
+- Available task types.
+- Fair-work thresholds.
+- Partner pathways.
+- Training modules.
+- Opportunity categories.
+
+
+11. ETHICAL SAFEGUARDS
+
+11.1 Avoiding cheap-labour extraction
+The system should not optimise for cheapest labour. It should optimise for fair entry, transparent pay, skill progression, and portable evidence.
+
+11.2 Fair pay visibility
+Workers should see expected pay, estimated time, and how it compares with local benchmarks.
+
+11.3 Harmful content protection
+Tasks involving traumatic, violent, hateful, or sexually explicit material should be clearly flagged, restricted, or excluded from entry-level pathways.
+
+11.4 Progression requirement
+Task work should contribute to a skills record. Users should not simply complete tasks with no long-term value.
+
+11.5 Data dignity
+Users should know what they are sharing and why. They should be able to control, hide, or delete parts of their profile.
+
+11.6 No permanent anonymity
+The system may reduce bias by initially focusing on skills rather than name, accent, school, or nationality. But users should not be permanently reduced to anonymous task workers.
+
+11.7 Education-neutral, not anti-education
+Formal education can be included, but lack of education should not automatically exclude someone from entry-level AI work if they can demonstrate capability.
+
+11.8 No overclaiming
+The system should distinguish between self-reported experience, demonstrated ability, and verified skill. It should use confidence levels rather than making exaggerated claims.
+
+
+12. SUCCESS METRICS
+
+User-level metrics:
+- Number of users completing the screener.
+- Percentage passing Level 1 readiness.
+- Number of users matched to fair tasks.
+- Average earnings from matched work.
+- Skill progression rate.
+- Training completion rate.
+- Improvement after feedback.
+- Number of users progressing to higher-level roles.
+- User satisfaction and perceived dignity.
+
+Employer/platform metrics:
+- Task quality score.
+- Rework rate.
+- Language coverage improvement.
+- Time to find qualified annotators.
+- Worker retention.
+- Responsible sourcing compliance.
+
+Policy/programme metrics:
+- Hidden talent identified by language/country.
+- Training gaps identified.
+- Youth income generated.
+- Number of users without degrees accessing paid AI work.
+- Progression from entry-level work to reviewer/trainer roles.
+- Percentage of tasks meeting fair-work thresholds.
+
+
+13. NON-GOALS
+
+Label-to-Ladder is not:
+- A full annotation company.
+- A replacement for existing AI data-work platforms.
+- A generic job board.
+- A charity-only training scheme.
+- A platform that promises everyone a high-paying AI career.
+- A system that claims annotation alone solves youth unemployment.
+- A tool that treats local workers as cheap global labour.
+- A credential mill that certifies skills without evidence.
+
+The product is specifically focused on creating a fair operating layer for screening, matching, protecting, evidencing, and progressing workers in AI data work.
+
+
+14. RISKS AND MITIGATIONS
+
+Risk 1: The project could look like a cheap-labour pipeline.
+Mitigation:
+Use Fair Work Scores, wage benchmarking, harmful-content safeguards, portable credentials, and progression ladders.
+
+Risk 2: Users may exaggerate skills.
+Mitigation:
+Use practical readiness tests, confidence levels, task performance data, and verification steps.
+
+Risk 3: AI annotation may not lead to higher-value work.
+Mitigation:
+Make progression explicit through levels, training modules, reviewer pathways, and partner commitments.
+
+Risk 4: Too much cultural data could feel extractive.
+Mitigation:
+Use consent, data minimisation, user control, and clear explanation that cultural knowledge is used to match users to AI-evaluation work and build their own profile.
+
+Risk 5: Companies may prefer lowest-cost workers.
+Mitigation:
+Position the platform around responsible sourcing, quality, language coverage, and fair-work compliance.
+
+Risk 6: Data privacy and governance complexity.
+Mitigation:
+Use consent-based profiles, minimal data collection, configurable retention, and enterprise/public-sector deployment options in future versions.
+
+Risk 7: Overbroad target user.
+Mitigation:
+Focus on digitally reachable but credential-invisible youth, especially those with language, cultural, domain, or digital judgement relevant to AI evaluation.
+
+
+15. DEMO NARRATIVE
+
+The demo should show a user entering through a simple onboarding journey.
+
+The user selects:
+- Country: Madagascar.
+- Languages: Malagasy and French.
+- Interests: local food, mobile money, football, online learning.
+- Domain knowledge: local commerce and customer service.
+- Education: optional or non-gating.
+
+The AI asks tailored follow-up questions:
+- What local phrase would an AI often misunderstand?
+- What does a natural AI answer in Malagasy/French sound like?
+- Can you correct this sentence?
+- Which AI response is more accurate?
+- Is this answer culturally appropriate?
+- Can you check whether this claim is true?
+
+The platform then generates:
+- AI work readiness level.
+- Skill Passport.
+- Confidence scores.
+- Suggested pathway.
+- Fair task matches.
+- Next training step.
+
+A second screen shows the policy/company dashboard:
+- Hidden AI-ready users.
+- Language coverage gaps.
+- Training needs.
+- Fair-work flags.
+- Progression pipeline.
+
+The final message:
+“AI data work already exists. The question is whether young people remain invisible task workers, or whether every task becomes a step toward recognised AI skills, better income, and local digital capacity.”
+
+
+16. ONE-SENTENCE PRODUCT DESCRIPTION
+
+Label-to-Ladder is a fair AI data-work infrastructure layer that replaces degree-proxy hiring with proof-of-skill screening, connects credential-invisible youth to safe paid annotation and evaluation work, and turns every completed task into portable evidence for progression into higher-value AI/data roles.
+
+
+17. STRONGEST PITCH LINES
+
+“The bachelor’s degree is being used as a proxy for readiness. We measure readiness directly.”
+
+“Every paid task becomes both income and evidence.”
+
+“AI models do not only need coders. They need people who know when an answer sounds wrong, translates badly, misses local context, or misunderstands a community.”
+
+“AI annotation already exists in LMICs. The question is whether it becomes another invisible outsourcing layer, or a recognised pathway into the AI economy.”
+
+“We are not building a cheap-labour marketplace. We are building a fair progression pipeline.”
+
+“Label-to-Ladder turns human judgement — language, culture, accuracy, and context — into paid work, recognised skills, and future AI opportunity.”
+
+
+18. FINAL CONCEPT SUMMARY
+
+Label-to-Ladder addresses the UNMAPPED challenge by focusing on a specific and timely opportunity: entry-level AI data work as a pathway into the AI economy for digitally reachable but credential-invisible youth.
+
+The product recognises that AI companies need more than engineers. They need people who can evaluate language, correct grammar, identify hallucinations, detect cultural mismatches, assess tone, and contribute domain-specific human judgement. Many young people in LMICs can do this work, but they are often excluded by degree filters or informal recruitment systems.
+
+Label-to-Ladder gives these young people a fair way to prove readiness, access paid work, and build a portable skills record. It also gives AI companies a better, fairer, and more responsible way to source local-language and culturally aware human evaluation. For public institutions and development partners, it creates a scalable infrastructure layer for inclusive AI work, youth income generation, and local digital capacity-building.
+
+The project’s central belief is that AI data work should not be invisible labour. It should be a ladder.

@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f5f3ed;
+  --paper: #fffdf8;
+  --ink: #14201c;
+  --ink-2: #3d5049;
+  --line: rgba(20, 32, 28, 0.09);
+  --teal: #0d6b62;
+  --teal-dark: #094f48;
+  --teal-light: #e4f2f0;
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-inter);
+}
+
+::selection {
+  background: #b2ddd9;
+  color: #0a3d39;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 32, 28, 0.18);
+  border-radius: 9999px;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 40% at 60% -10%, rgba(13, 107, 98, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 10% 80%, rgba(13, 107, 98, 0.05) 0%, transparent 60%);
+  color: var(--ink);
+  font-family: var(--font-inter);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* ─── Focus ring ─────────────────────────────────────── */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: var(--teal);
+}
+
+/* ─── Entrance animations ────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 680ms cubic-bezier(0.22, 0.9, 0.36, 1) both;
+  }
+
+  .rise-1 { animation-delay: 80ms; }
+  .rise-2 { animation-delay: 160ms; }
+  .rise-3 { animation-delay: 240ms; }
+  .rise-4 { animation-delay: 320ms; }
+  .rise-5 { animation-delay: 400ms; }
+  .rise-6 { animation-delay: 480ms; }
+
+  .float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.03); }
+}
+
+/* ─── Score ring (SVG-driven) ────────────────────────── */
+.score-ring-track {
+  fill: none;
+  stroke: rgba(20, 32, 28, 0.08);
+  stroke-width: 8;
+}
+
+.score-ring-fill {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset 900ms cubic-bezier(0.22, 0.9, 0.36, 1);
+}
+
+/* ─── Section label ──────────────────────────────────── */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ─── Chip pill ──────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.85);
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.chip::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+
+/* ─── Metric accent bar ──────────────────────────────── */
+.metric-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 1.75rem 1.75rem 0 0;
+  background: var(--teal);
+}
